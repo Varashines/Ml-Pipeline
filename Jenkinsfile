@@ -2,7 +2,8 @@ pipeline {
     agent any
     
     environment {
-        PYTHON = 'python3'
+        PYTHON = '/Users/vara/.pyenv/versions/3.11.11/bin/python'  // Use system Python
+        PIP = '/Users/vara/.pyenv/versions/3.11.11/bin/pip'        // Use system pip
     }
     
     stages {
@@ -10,7 +11,10 @@ pipeline {
             steps {
                 script {
                     echo 'Setting up environment...'
-                    sh 'pip install -r requirements.txt'
+                    sh '''
+                        ${PYTHON} -m pip install --upgrade pip
+                        ${PIP} install -r requirements.txt
+                    '''
                 }
             }
         }
